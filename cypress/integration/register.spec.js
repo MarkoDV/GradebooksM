@@ -12,12 +12,12 @@ describe('Registration on Gradebook HomePage', () => {
         cy.get('.nav-link').contains('Register').should('be.visible').click();
     })
     it.skip('Should be registered', () => {
-        regPage.register('Marko', 'Davidovic', '12345678', '12345678', 'macanes02@gmail.com');
+        regPage.register('Isadora', 'Duncan', 'angelaisadoraduncan1877', 'angelaisadoraduncan1877', 'Clarabelle55@yahoo.com');
         cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');
         cy.get('.nav-link').contains('Sign out').should('be.visible');
     });
     it('Confirmation password doesn`t match', () => {
-        regPage.register(prvoIme, prezIme, randomPassword, '12345678', randomEmail);
+        regPage.register(prvoIme, prezIme, randomPassword, 'angelaisadoraduncan1877', randomEmail);
         //it is not possible to find class for alert popup and this message for confirmation password is not integral part of html input fileds
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Your passwords doesn`t match, try again, please');

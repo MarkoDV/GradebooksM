@@ -6,8 +6,7 @@ export default class CreateGB {
         return cy.get('#title');
     };
     get selectOpt(){
-        return cy.get('#professor').select('10')
-        .should('have.value', '10');
+        return cy.get('#professor')
     };
     get submitting(){
         return cy.get('.btn').contains('Submit');
@@ -15,7 +14,7 @@ export default class CreateGB {
     creation(naslov){
         this.createGBBttn.click();
         this.title.type(naslov);
-        this.selectOpt
+        this.selectOpt.select('17')
         this.submitting.click();
     };
 };
