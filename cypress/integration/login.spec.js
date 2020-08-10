@@ -1,6 +1,6 @@
 /// <reference types="Cypress"/> 
 import {user} from '../fixtures/user';
-import  { authPage } from '../integration/pageObject/loginPOM';
+import  {authPage} from '../integration/pageObject/loginPOM';
 const faker = require('faker');
 let randomEmail = faker.internet.email();
 let randomPassword = faker.internet.password();
