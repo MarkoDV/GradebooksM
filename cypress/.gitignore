@@ -1,0 +1,12 @@
+# Dependencies directories
+node_modules/
+jspm_packages/
+
+# Cypress videos
+cypress/videos
+cypress/screenshots
+cypress/reports
+cypres/.DS_Store
+
+# OS generated files
+.DS_Store

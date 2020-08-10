@@ -1,0 +1,8 @@
+{
+        "baseUrl": "https://gradebook.vivifyideas.com",
+        "chromeWebSecurity": false,
+        "numTestsKeptInMemory": 0,
+        "env": {
+                "apiUrl" : "https://gradebook-api.vivifyideas.com/api"
+            }
+}

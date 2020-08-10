@@ -1,0 +1,17 @@
+{
+  "name": "cypress-bluebird",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "testing"
+  },
+  "author": "marko",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^4.4.1"
+  },
+  "dependencies": {
+    "faker": "^4.1.0"
+  }
+}
