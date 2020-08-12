@@ -6,7 +6,7 @@ import {createGB} from './pageObject/creategbPOM';
 const faker = require('faker');
 let randomTitle = faker.random.word();
 
-describe('Create n gradebooks', ()=>{
+describe('Write and delete comments', ()=>{
     beforeEach(()=>{
         cy.visit('/')
         cy.server();
@@ -78,7 +78,7 @@ describe('Create n gradebooks', ()=>{
             expect(loc.pathname).to.include('/my-gradebook')
             expect(loc.search).to.be.empty
         });
-        cy.get('.comments-box').should('not.have.descendants', 'comments');
+        cy.get('.comments-box').should('not.have.descendants', '.comments');
     });
     it('Delete my gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();

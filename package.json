@@ -9,7 +9,7 @@
   "author": "marko",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.4.1"
+    "cypress": "^4.12.1"
   },
   "dependencies": {
     "faker": "^4.1.0"
