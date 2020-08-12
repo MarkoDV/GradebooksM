@@ -48,7 +48,7 @@ describe('Registration on Gradebook HomePage', () => {
         });
     });
     it('Password form-password has less then 8 characters', () => {
-        regPage.register(prvoIme, prezIme, '123', '123', randomEmail)
+        regPage.register(prvoIme, prezIme, '1234567', '1234567', randomEmail)
         cy.get('#password').then(($input) => {
             expect($input[0].validationMessage).to.eq('Please match the format requested.');
         });

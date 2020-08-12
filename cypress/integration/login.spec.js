@@ -10,7 +10,6 @@ describe('The Home Page', ()=> {
     cy.visit('/');
     cy.server();
     cy.route(Cypress.env('apiUrl') + '/diaries?page=1').as('gb');
-    cy.viewport('macbook-13');
   });
     it('Signin-valid data', ()=> {
       authPage.signin(user.email, user.password);
