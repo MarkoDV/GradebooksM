@@ -25,7 +25,7 @@ describe('Write and delete comments', ()=>{
             localStorage.setItem('loginToken', response.body.token)
         });
     });
-    it('Should be able to write comment without own gradebook?', ()=>{
+    it('TC 67 - Write comment without gradebook on My Gradebook Page', ()=>{
         cy.get('.nav-link').contains('My Gradebook').should('be.visible')
           .invoke('removeAttr', 'target')
           .click();
@@ -38,7 +38,7 @@ describe('Write and delete comments', ()=>{
         cy.get('.alert-danger')
           .should('have.text',`\n      Message: You dont have your diary. Please first set your own diary\n    `)
     });
-    it('Should be able to create comment with own gradebook', ()=>{
+    it('TC 68 - Should be able to create comment on own gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
         createGB.creation('Litte Red Riding Hood');
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
@@ -58,7 +58,7 @@ describe('Write and delete comments', ()=>{
         cy.url().should('include', 'my-gradebook');
         cy.get('.comments-box').should('have.descendants', '.comments');
      });
-     it('Should be able to write multiple comments',()=>{
+     it('TC 68 multiple - Should be able to write multiple comments',()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         for(let i=0; i<5; i++){
@@ -68,7 +68,7 @@ describe('Write and delete comments', ()=>{
             cy.get('.nav-link').contains('My Gradebook').click();
         };
      });
-     it('Should be able to delete comments', ()=>{
+     it('TC 71 - Delete comment on My Gradebook Page', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         for(let i =0; i<6; i++){
             cy.get('.btn-danger').eq(1).contains('Delete').click();
@@ -80,7 +80,7 @@ describe('Write and delete comments', ()=>{
         });
         cy.get('.comments-box').should('not.have.descendants', '.comments');
      });
-     it('Delete my gradebook', ()=>{
+     it('TC 65 - Delete my gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         cy.get('.btn-danger').contains('Delete Gradebook').click(); 

@@ -2,18 +2,17 @@
 import {user} from '../fixtures/user';
 import  {authPage} from './pageObject/loginPOM';
 import {createGB} from './pageObject/creategbPOM';
-import {studentGB} from './pageObject/studentPOM'
+import {studentGB} from './pageObject/studentPOM';
+import {professorGB} from './pageObject/professorPOM'
 const faker = require('faker');
-let randomTitle = faker.random.word();
 let randomName = faker.name.findName();
 let randomSurname = faker.name.lastName();
 
-describe('Create, read, edit, add student and delete gradebook', ()=>{
+describe('Add students and create professor', ()=>{
     beforeEach(()=>{
         cy.visit('/');
         cy.server();
         cy.route(Cypress.env('apiUrl') + '/diaries?page=1').as('gb');
-        cy.route(Cypress.env('apiUrl') + '/gradebooks').as('gbs');
         authPage.signin(user.email, user.password);
         cy.wait('@gb')
     });
@@ -30,7 +29,7 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
             cy.url().should('include', 'single-gradebook'); 
         }; 
     });
-    it('Delete my gradebook', ()=>{
+    it('TC 65 - Delete my gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         cy.get('.btn-danger').should('be.visible').click(); 
@@ -39,8 +38,23 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
         cy.get('.btn').contains('Search').should('be.visible').click();
         cy.contains('There is no more gradebooks in base, try again').should('be.visible');
     });
-    it('Create Professor', ()=>{
-        cy.get('.dropdown').click();
-
-    }) 
+    it('TC 73 - Professors filter(gradebook is not yet created by user)', ()=>{
+        cy.get('#navbardrop').click();
+        cy.get('.nav-item').contains('All Professors').click();
+        cy.url().should('include', 'all-professors');
+        //mora delay jer ako ne stavim ostane samo crna tabla sa thead bez podataka u row ispod o izbranom autoru(useru)
+        cy.get('input[type=text').type('Isadora', {delay:100});
+    });
+    it('TC 75 - Professors - Create Professor', ()=>{
+        cy.get('#navbardrop').click();
+        cy.get('.nav-item').contains('Create Professor').click();
+        cy.url().should('include', 'create-professor');
+        professorGB.createProf(randomName, randomSurname, 'https://globallovemuseum.net/wp-content/uploads/2019/06/yesenincolor_crop.jpg');
+        cy.scrollTo('bottom');
+        cy.url().should('include', 'all-professors');
+    });
+    it('TC 79 - Reload All Professors Page', ()=>{
+        cy.reload();
+        cy.get('center').eq(0).should('contain.html', 'h1').and('contain.text', '404 Not Found')
+    })
 });
