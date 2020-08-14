@@ -17,12 +17,12 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
         authPage.signin(user.email, user.password);
         cy.wait('@gb')
     });
-    it('Create new gradebook', ()=>{
+    it('TC 51 - Create new gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
         createGB.creation('Litte Red Riding Hood');
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
     });
-    it('Gradebook, with  5 new student', ()=>{
+    it('TC 55 multiple - Gradebook, with  5 new student', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         for (let i=0; i<5; i++) {

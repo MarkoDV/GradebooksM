@@ -57,8 +57,8 @@ describe('Write and delete comments', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         cy.get('.comments-box').should('have.descendants', '.comments');
-    });
-    it('Should be able to write multiple comments',()=>{
+     });
+     it('Should be able to write multiple comments',()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         for(let i=0; i<5; i++){
@@ -67,8 +67,8 @@ describe('Write and delete comments', ()=>{
             cy.get('.nav-link').contains('Gradebooks').should('be.visible').click();
             cy.get('.nav-link').contains('My Gradebook').click();
         };
-    });
-    it('Should be able to delete comments', ()=>{
+     });
+     it('Should be able to delete comments', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         for(let i =0; i<6; i++){
             cy.get('.btn-danger').eq(1).contains('Delete').click();
@@ -79,11 +79,11 @@ describe('Write and delete comments', ()=>{
             expect(loc.search).to.be.empty
         });
         cy.get('.comments-box').should('not.have.descendants', '.comments');
-    });
-    it('Delete my gradebook', ()=>{
+     });
+     it('Delete my gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
-        cy.get('.btn-danger').click(); 
+        cy.get('.btn-danger').contains('Delete Gradebook').click(); 
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
-    });
-});
+     });
+ });
