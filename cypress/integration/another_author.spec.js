@@ -1,11 +1,10 @@
 /// <reference types="Cypress"/> 
 import {user} from '../fixtures/user';
-import {gradebook} from '../fixtures/gradebook'
 import  {authPage} from './pageObject/loginPOM';
-import {createGB} from './pageObject/creategbPOM';
 import {studentGB} from './pageObject/studentPOM'
 const faker = require('faker');
 let alphanum = faker.random.alphaNumeric(255);
+let randomTitle = faker.random.word();
 
 describe('Visit and modify another author gradebook', ()=>{
     beforeEach(()=>{
@@ -34,12 +33,13 @@ describe('Visit and modify another author gradebook', ()=>{
         cy.url().should('include', 'single-gradebook');
         cy.get('.btn-warning').contains('Edit Gradebook').click();
         cy.url().should('contain', 'single-gradebook');
-        cy.get('#title').clear().type('Odd new odd gradebook');
+        cy.get('#title').clear().type(randomTitle);
+        // Tantalus' struggle
         cy.get('#professor')
-            .then(function ($select) {
-                let value = $select[0].value;
-                cy.get('#professor').select(value, { force: true });
-            });
+          .find('option')
+          .then($elm => $elm.get(0).setAttribute('selected', "selected"))
+          .parent()
+          .trigger('change')
         cy.get('.btn-primary').contains('Submit').click();
     });
     it('TC 38 - Write comment at the Single Gradebook Page from other author (255 characters)',()=>{

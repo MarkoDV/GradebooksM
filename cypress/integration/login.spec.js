@@ -11,6 +11,18 @@ describe('The Home Page', ()=> {
     cy.server();
     cy.route(Cypress.env('apiUrl') + '/diaries?page=1').as('gb');
   });
+    it('TC 4 - Sign in with non registered email address', ()=>{
+      cy.get('.nav-link').contains('Sign in').click();
+      authPage.signin(randomEmail, user.password);
+      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login')
+      cy.get('.nav-link').contains('Sign in').should('be.visible');
+    });
+    it('TC 5 - Sign in with wrong password', ()=>{
+      cy.get('.nav-link').contains('Sign in').click();
+      authPage.signin(user.email, randomPassword);
+      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login')
+      cy.get('.nav-link').contains('Sign in').should('be.visible');
+    });
     it('TC 7 - Sign in with valid email and password', ()=> {
       authPage.signin(user.email, user.password);
       cy.wait('@gb')
@@ -34,18 +46,6 @@ describe('The Home Page', ()=> {
         expect(loc.pathname).to.eq('/gradebooks')
       });
     });
-    it('TC 4 - Sign in with non registered email address', ()=>{
-      cy.get('.nav-link').contains('Sign in').click();
-      authPage.signin(randomEmail, user.password);
-      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login')
-      cy.get('.nav-link').contains('Sign in').should('be.visible');
-    });
-    it('TC 5 - Sign in with wrong password', ()=>{
-      cy.get('.nav-link').contains('Sign in').click();
-      authPage.signin(user.email, randomPassword);
-      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login')
-      cy.get('.nav-link').contains('Sign in').should('be.visible');
-    });
     it('TC Special - Sig in without any credentials', ()=>{
       cy.get('input[type=text]').invoke('val', '');
       cy.get('input[type=password]').invoke('val', '');
@@ -54,5 +54,12 @@ describe('The Home Page', ()=> {
         expect($input[0].validationMessage).to.eq('Please fill in this field.');
       });
     });
+    it('TC 8 - Verify the logout operation', ()=>{
+      authPage.signin(user.email, user.password);
+      cy.wait('@gb')
+      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');
+      cy.get('.nav-link').contains('Sign out').should('be.visible').click();
+      cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login');
+    })
  });
 

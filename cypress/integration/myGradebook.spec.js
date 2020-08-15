@@ -8,33 +8,34 @@ let randomTitle = faker.random.word();
 let alphanum = faker.random.alphaNumeric(255);
 let supraalphanum = faker.random.alphaNumeric(256);
 let supremealphanum = faker.random.alphaNumeric(257);
-let randomName = faker.name.findName();
-let randomSurname = faker.name.lastName();
 //nije korisceno jer nema odakle da povuce img iz servera, nego konkretna slika
 let randomImg = faker.image.imageUrl();
 
-describe('Create, read, edit, add student and delete gradebook', ()=>{
+describe('Create, edit, and delete my gradebook', ()=>{
     beforeEach(()=>{
         cy.visit('/');
         cy.server();
         cy.route(Cypress.env('apiUrl') + '/diaries?page=1').as('gb');
-        cy.route(Cypress.env('apiUrl') + '/gradebooks').as('gbs');
         authPage.signin(user.email, user.password);
-        cy.wait('@gb')
+        cy.wait('@gb');
     });
-    it('TC 66 - Add student without gradebook', ()=>{
-        cy.get('.nav-link').contains('My Gradebook').should('be.visible').click();
-        cy.get('.btn').contains('Add Student').should('be.visible').click();
-        cy.get('.alert-danger')
-          .should('have.text',`\n      Message: You dont have your diary. Please first set your own diary\n    `)
+    it('POST-login', ()=>{
+        //for both cy.loginBeck and with rq, I will stay not signed in
+        cy.loginBeck(user.email, user.password);
+        cy.request('POST', 'https://gradebook-api.vivifyideas.com/api/login', { "email": "Clarabelle55@yahoo.com", "password": "angelaisadoraduncan1877" })
+        .then((response) => {
+            expect(response.body).to.have.property('token')
+            localStorage.setItem('loginToken', response.body.token)
+        });
     });
     it('TC 51 - Create gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
-        createGB.creation('Litte Red Riding Hood');
+        createGB.creation('Litte Rot Riding Hood');
+        cy.wait('@gb')
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
     });
     it('TC 52 - Gradebook Filter - find newly created gradebook',()=>{
-        cy.get('input[type=text]').type('Litte Red Riding Hood');
+        cy.get('input[type=text]').type('Litte Rot Riding Hood');
         cy.get('.btn-primary').contains('Search').click();
     })
     it('TC 61 - Edit gradebook title', ()=>{
@@ -64,7 +65,7 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
         cy.get('.btn-primary').contains('Submit').click();
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
     });
-    it('TC 64 - Edit gradebook title(257 characters', ()=>{
+    it('TC 64 - Edit gradebook title(257 characters)', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         cy.get('.btn-warning').contains('Edit Gradebook').should('be.visible').click();
@@ -74,15 +75,8 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
         cy.url().should('include', 'single-gradebook');
     })
     it('TC 52 - Gradebook Filter - find newly created gradebook with previous title, before edited', ()=>{
-        cy.get('input[type=text]').type('Litte Red Riding Hood');
+        cy.get('input[type=text]').type('Litte Rot Riding Hood');
         cy.get('.btn-primary').contains('Search').click();
-        cy.contains('There is no more gradebooks in base, try again');
-    });
-    it('TC 55 - Add Student to Gradebook', ()=>{
-        cy.get('.nav-link').contains('My Gradebook').click();
-        cy.url().should('include', 'my-gradebook');
-        studentGB.studentAdd(randomName, randomSurname, 'https://i.pinimg.com/originals/23/52/f7/2352f71cba2c87344fc611b0e7ee7cb5.jpg');
-        cy.url().should('include', 'single-gradebook');  
     });
     it('TC 65 - Delete my gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
@@ -90,7 +84,7 @@ describe('Create, read, edit, add student and delete gradebook', ()=>{
         cy.get('.btn-danger').should('be.visible').click(); 
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
         //filter after deleted gradebook
-        cy.get('input[type=text]').should('be.visible').type('Little Red Riding Hood');
+        cy.get('input[type=text]').should('be.visible').type('Little Rot Riding Hood');
         cy.get('.btn').contains('Search').should('be.visible').click();
         cy.contains('There is no more gradebooks in base, try again').should('be.visible');
     }); 

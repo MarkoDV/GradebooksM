@@ -5,7 +5,7 @@ export default class CreateGB {
     get selectOpt(){
         return cy.get('#professor').select('Isadora Duncan')
                  .invoke('val')
-                 .should('deep.equal', '17')
+                 .should('deep.equal', '17');
     };
     get submitting(){
         return cy.get('.btn').contains('Submit');

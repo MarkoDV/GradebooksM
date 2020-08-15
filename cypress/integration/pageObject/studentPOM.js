@@ -1,6 +1,6 @@
 export default class StudentGB {
    get add(){
-       return cy.get('.btn').contains('Add Student');
+       return cy.get('.btn-primary').contains('Add Student');
    };
    get name(){
        return cy.get('#firstName');
@@ -15,7 +15,7 @@ export default class StudentGB {
        return cy.get('input[placeholder="Image URL"]').should('be.visible');
    };
    get submiter(){
-       return cy.get('.btn').contains('Submit');
+       return cy.get('.btn-primary').contains('Submit');
    };
    studentAdd(ime, prezime, slika){
        this.add.click();
