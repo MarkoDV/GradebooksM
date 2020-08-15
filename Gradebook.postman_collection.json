@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "0b6b7057-be5a-48b2-8c6e-2106a49b80e2",
+		"name": "Gradebook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "LOGOVANJE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6aba6270-1cbc-4b27-91ef-4a50c8f05c37",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"gradebook_token\", jsonData.token);",
+									"pm.environment.set(\"userID\", jsonData.user.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"macanes02@gmail.com\",\"password\":\"12345678\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}login",
+							"host": [
+								"{{baseUrl}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d2a495a-6039-4434-b069-e51c6d761818",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"gradebook_token2\", jsonData.token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"Clarabelle55@yahoo.com\",\"password\":\"angelaisadoraduncan1877\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}login",
+							"host": [
+								"{{baseUrl}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "GET GB",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}diaries?page=1",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CreateGradebook",
+			"item": [
+				{
+					"name": "create_professor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "58922a2e-2dd2-432b-bfcf-eb1717719d69",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test('Succesfull POST request', function() {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,201])",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"url\":[\"https://upload.wikimedia.org/wikipedia/commons/a/a1/Esenin_Moscow_1922.jpg\"],\"firstName\":\"Sergei\",\"lastName\":\"Yesenin\",\"diary_id\":\"\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}professors",
+							"host": [
+								"{{baseUrl}}professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab292c4e-b573-4ddc-b6fb-c3dc12009c63",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"gb_id\", jsonData.id);",
+									"",
+									"tests[\"gbID = \" + jsonData.id] = typeof jsonData.id == \"number\";",
+									"",
+									"pm.test(\"Title is ok\", function () {",
+									"  pm.expect(jsonData.title).to.include(\"Riding\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"pm.test('Succesfull POST request', function() {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,201])",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"Red Riding\",\"professor_id\":10}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}diaries",
+							"host": [
+								"{{baseUrl}}diaries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa76e0eb-f803-4808-90b1-41ff6868b512",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"gradebook title = \" + jsonData.title] = jsonData.title === \"Little Red Riding Hood\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"Little Red Riding Hood\",\"professor_id\":10}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b643823f-571b-43d0-9afa-44eeb7ec4349",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"tests[\"Message = \" + jsonData.message] = jsonData.message === \"Gallery Saved!!\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"firstName\":\"Wolf \",\"lastName\":\"Lobo\",\"url\":[\"https://i.pinimg.com/originals/23/52/f7/2352f71cba2c87344fc611b0e7ee7cb5.jpg\"]}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}/students",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "kreirati_komentar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "39cc86bc-c2af-482a-9ab2-b84c7aaf61df",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"idComment\", jsonData.id);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Test comment is okay\", function () {",
+									"   pm.expect(jsonData.text).to.equal(\"Crvenkapa\");",
+									" });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\":\"Crvenkapa\",\"user_id\":10}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}/comments",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_komentar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "499090ba-d9a0-4d1a-b66d-467466bca3a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}comments/{{idComment}}",
+							"host": [
+								"{{baseUrl}}comments"
+							],
+							"path": [
+								"{{idComment}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_myGall",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8fadf1b2-ecb2-4751-babf-292bc16a9f99",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Nema komentara\", function () {",
+									"    pm.expect(jsonData.comments.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_gradebook(permission/user2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1553ba35-1df0-4f29-b4a6-12e0a7cde466",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token2}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b1513f0f-2be5-4e2a-bf94-741b5b009084",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{gradebook_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}diaries/{{gb_id}}",
+							"host": [
+								"{{baseUrl}}diaries"
+							],
+							"path": [
+								"{{gb_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
