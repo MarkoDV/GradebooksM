@@ -51,8 +51,4 @@ describe('Add students', ()=>{
         cy.get('.btn').contains('Search').should('be.visible').click();
         cy.contains('There is no more gradebooks in base, try again').should('be.visible');
     });
-    it('TC 79 - Reload All Professors Page', ()=>{
-        cy.reload();
-        cy.get('center').eq(0).should('contain.html', 'h1').and('contain.text', '404 Not Found')
-    })
 });
