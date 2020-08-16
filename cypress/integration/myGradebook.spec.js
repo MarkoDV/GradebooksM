@@ -30,12 +30,12 @@ describe('Create, edit, and delete my gradebook', ()=>{
     });
     it('TC 51 - Create gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
-        createGB.creation('Litte Rot Riding Hood');
+        createGB.creation('Little Red Riding Hood');
         cy.wait('@gb')
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
     });
     it('TC 52 - Gradebook Filter - find newly created gradebook',()=>{
-        cy.get('input[type=text]').type('Litte Rot Riding Hood');
+        cy.get('input[type=text]').type('Little Red Riding Hood');
         cy.get('.btn-primary').contains('Search').click();
     })
     it('TC 61 - Edit gradebook title', ()=>{

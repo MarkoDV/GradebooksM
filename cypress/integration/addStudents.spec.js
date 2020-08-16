@@ -25,7 +25,7 @@ describe('Add students', ()=>{
     it('TC 51 - Create new gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
         createGB.creation('Litte Red Riding Hood');
-        cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
+        cy.wait('@gb');
     });
     it('TC 55 - Add Student to Gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
@@ -45,6 +45,7 @@ describe('Add students', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
         cy.url().should('include', 'my-gradebook');
         cy.get('.btn-danger').should('be.visible').click(); 
+        cy.wait('@gb');
         cy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');
         cy.get('input[type=text]').should('be.visible').type('Little Red');
         cy.get('.btn').contains('Search').should('be.visible').click();

@@ -2,7 +2,6 @@
 import {user} from '../fixtures/user';
 import  {authPage} from './pageObject/loginPOM';
 import {createGB} from './pageObject/creategbPOM';
-import {studentGB} from './pageObject/studentPOM';
 import {professorGB} from './pageObject/professorPOM'
 const faker = require('faker');
 let randomName = faker.name.findName();
@@ -43,7 +42,7 @@ describe('Create Professor', ()=>{
         cy.get('#navbardrop').click();
         cy.get('.nav-item').contains('All Professors').click();
         cy.url().should('include', 'all-professors');
-        //mora delay jer ako ne stavim ostane samo crna tabla sa thead bez podataka u row ispod o izbranom autoru(useru)
+        //mora delay jer ako ne stavim ostane samo crna tabla sa thead bez podataka u row ispod o izabranom profesoru
         cy.get('input[type=text').type('Tom', {delay:100});
         cy.scrollTo('bottom');
     });

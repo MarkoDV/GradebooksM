@@ -11,7 +11,7 @@ describe('Registration on Gradebook HomePage', () => {
         cy.visit('/');
         cy.get('.nav-link').contains('Register').should('be.visible').click();
     })
-    it.skip('TC 11 - Register - valid data', () => {
+    it.skip('TC 11 - Register - valid registration', () => {
         regPage.register('Isadora', 'Duncan', 'angelaisadoraduncan1877', 'angelaisadoraduncan1877', 'Clarabelle55@yahoo.com');
         cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');
         cy.get('.nav-link').contains('Sign out').should('be.visible');
@@ -87,7 +87,8 @@ describe('Registration on Gradebook HomePage', () => {
         cy.reload();
         cy.get('center').eq(0).should('contain.html', 'h1').and('contain.text', '404 Not Found')
     })
-    it.skip('TC 12 - Register with the same credentials twice', () => {
+    it('TC 12 - Register with the same credentials twice', () => {
         regPage.register('Marko', 'Davidovic', '12345678', '12345678', 'macanes02@gmail.com');
+        cy.url().should('include', 'gradebooks');
     });
 }); 

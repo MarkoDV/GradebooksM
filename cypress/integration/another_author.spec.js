@@ -13,7 +13,6 @@ describe('Visit and modify another author gradebook', ()=>{
         cy.route('GET', Cypress.env('apiUrl') + '/diaries?page=1').as('gb');
         cy.get('.nav-link').contains('Sign in').click();
         authPage.signin(user.email, user.password);
-        cy.wait('@gb')
         cy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');
     });
     it('TC 31 - Visit Single Gradebebook Page of another author-professor', ()=>{
@@ -37,7 +36,7 @@ describe('Visit and modify another author gradebook', ()=>{
         // Tantalus' struggle
         cy.get('#professor')
           .find('option')
-          .then($elm => $elm.get(0).setAttribute('selected', "selected"))
+          .then($elm => $elm.get(1).setAttribute('selected', "selected"))
           .parent()
           .trigger('change')
         cy.get('.btn-primary').contains('Submit').click();
