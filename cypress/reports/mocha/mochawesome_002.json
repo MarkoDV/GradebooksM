@@ -1,0 +1,183 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-08-29T15:05:35.600Z",
+    "end": "2020-08-29T15:05:54.731Z",
+    "duration": 19131,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a49dad24-7413-4447-8b16-2f0475a76d3e",
+      "title": "",
+      "fullFile": "cypress/integration/comments.spec.js",
+      "file": "cypress/integration/comments.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+          "title": "Write and delete comments",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC 67 - Write comment without gradebook on My Gradebook Page",
+              "fullTitle": "Write and delete comments TC 67 - Write comment without gradebook on My Gradebook Page",
+              "timedOut": null,
+              "duration": 3508,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').should('be.visible').invoke('removeAttr', 'target').click();\ncy.url().should('include', 'my-gradebook');\ncy.get('textarea').should('be.visible').and('have.attr', 'placeholder', 'Writte your comment').type(words);\ncy.get('.btn').contains('Submit Comment').should('be.visible').click();\ncy.get('.alert-danger').should('have.text', \"\\n      Message: You dont have your diary. Please first set your own diary\\n    \");",
+              "err": {},
+              "uuid": "9b691d63-70d0-46e1-bfe7-b4168c320dd3",
+              "parentUUID": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 68 - Should be able to create comment on own gradebook",
+              "fullTitle": "Write and delete comments TC 68 - Should be able to create comment on own gradebook",
+              "timedOut": null,
+              "duration": 4861,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();\n_creategbPOM.createGB.creation('Litte Red Riding Hood');\ncy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');\ncy.get('.nav-link').contains('My Gradebook').should('be.visible').invoke('removeAttr', 'target').click();\ncy.url().should('include', 'my-gradebook');\ncy.get('textarea').should('be.visible').and('have.attr', 'placeholder', 'Writte your comment').type('Crvenkapa');\ncy.get('.btn').contains('Submit Comment').should('be.visible').click();\ncy.wait('@gb');\ncy.get('.nav-link').contains('Gradebooks').should('be.visible').click();\ncy.wait('@gb');\ncy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\ncy.get('.comments-box').should('have.descendants', '.comments');",
+              "err": {},
+              "uuid": "67a651ef-eebc-4c2a-a2b0-c95db9056854",
+              "parentUUID": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 68 multiple - Should be able to write multiple comments",
+              "fullTitle": "Write and delete comments TC 68 multiple - Should be able to write multiple comments",
+              "timedOut": null,
+              "duration": 5599,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\nfor (var i = 0; i < 3; i++) {\n  cy.get('textarea').type(words);\n  cy.get('.btn').contains('Submit Comment').should('be.visible').click();\n  cy.get('.nav-link').contains('Gradebooks').should('be.visible').click();\n  cy.get('.nav-link').contains('My Gradebook').click();\n}\n;",
+              "err": {},
+              "uuid": "808bd287-b2f0-4c6e-b60d-a1e1c09c9152",
+              "parentUUID": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 71 - Delete comments on My Gradebook Page",
+              "fullTitle": "Write and delete comments TC 71 - Delete comments on My Gradebook Page",
+              "timedOut": null,
+              "duration": 2859,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\nfor (var i = 0; i < 4; i++) {\n  cy.get('.btn-danger').eq(1).contains('Delete').click();\n  cy.get('.nav-link').contains('My Gradebook').click();\n}\ncy.location().should(function (loc) {\n  expect(loc.pathname).to.include('/my-gradebook');\n  expect(loc.search).to.be.empty;\n});\ncy.get('.comments-box').should('not.have.descendants', '.comments');",
+              "err": {},
+              "uuid": "5cff23ec-29f1-40f4-b394-04db05670fa3",
+              "parentUUID": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 65 - Delete my gradebook",
+              "fullTitle": "Write and delete comments TC 65 - Delete my gradebook",
+              "timedOut": null,
+              "duration": 2166,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\ncy.get('.btn-danger').contains('Delete Gradebook').click();\ncy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');",
+              "err": {},
+              "uuid": "68730b33-ac1c-4e92-8f83-0c48ce2750ab",
+              "parentUUID": "6c87113b-8f14-472b-9f1c-f8af3c843083",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9b691d63-70d0-46e1-bfe7-b4168c320dd3",
+            "67a651ef-eebc-4c2a-a2b0-c95db9056854",
+            "808bd287-b2f0-4c6e-b60d-a1e1c09c9152",
+            "5cff23ec-29f1-40f4-b394-04db05670fa3",
+            "68730b33-ac1c-4e92-8f83-0c48ce2750ab"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18993,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

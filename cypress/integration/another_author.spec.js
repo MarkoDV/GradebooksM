@@ -25,7 +25,6 @@ describe('Visit and modify another author gradebook', ()=>{
         cy.get('.table-dark td').eq(0).click();
         cy.url().should('include', 'single-gradebook');
         studentGB.studentAdd('Sergei', 'Yesenin', 'https://glamourprin.files.wordpress.com/2018/01/230px-esenin_moscow_1922.jpg');
-        cy.url().should('include', 'single-gradebook');
     });
     it('TC 35 - Edit Gradebook of the other author( title and professor)',()=>{
         cy.get('.table-dark td').eq(0).click();

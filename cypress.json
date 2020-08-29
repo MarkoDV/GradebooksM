@@ -1,6 +1,16 @@
 {
         "baseUrl": "https://gradebook.vivifyideas.com",
-        "chromeWebSecurity": false,
+        "reporter": "cypress-multi-reporters",
+       "reporterOptions": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/reports/mocha",
+            "quite": true,
+            "overwrite": false,
+            "html": false,
+            "json": true
+           }
+       },
         "numTestsKeptInMemory": 0,
         "env": {
                 "apiUrl" : "https://gradebook-api.vivifyideas.com/api"

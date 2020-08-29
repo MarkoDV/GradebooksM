@@ -1,0 +1,192 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 3,
+    "pending": 0,
+    "failures": 2,
+    "start": "2020-08-29T15:04:03.799Z",
+    "end": "2020-08-29T15:04:28.184Z",
+    "duration": 24385,
+    "testsRegistered": 5,
+    "passPercent": 60,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "05672b79-4e7b-4675-9610-06fef5052c44",
+      "title": "",
+      "fullFile": "cypress/integration/addStudents.spec.js",
+      "file": "cypress/integration/addStudents.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+          "title": "Add students",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC 66 - Add student without gradebook",
+              "fullTitle": "Add students TC 66 - Add student without gradebook",
+              "timedOut": null,
+              "duration": 2982,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').should('be.visible').click();\ncy.get('.btn').contains('Add Student').should('be.visible').click();\ncy.get('.alert-danger').should('have.text', \"\\n      Message: You dont have your diary. Please first set your own diary\\n    \");",
+              "err": {},
+              "uuid": "6efeef59-24fd-4fc8-88a8-0e82f8ec88c5",
+              "parentUUID": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 51 - Create new gradebook",
+              "fullTitle": "Add students TC 51 - Create new gradebook",
+              "timedOut": null,
+              "duration": 3235,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();\n_creategbPOM.createGB.creation('Litte Red Riding Hood');",
+              "err": {},
+              "uuid": "d8f25954-8eeb-4765-8a0c-b055fc5ba1af",
+              "parentUUID": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 55 - Add Student to Gradebook",
+              "fullTitle": "Add students TC 55 - Add Student to Gradebook",
+              "timedOut": null,
+              "duration": 6490,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\n_studentPOM.studentGB.studentAdd(randomName, randomSurname, 'https://i.pinimg.com/originals/23/52/f7/2352f71cba2c87344fc611b0e7ee7cb5.jpg');\ncy.url().should('include', 'single-gradebook');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `#firstName`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `#firstName`, but never found it.\n    at StudentGB.get (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:281:17)\n    at StudentGB.studentAdd (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:267:12)\n    at Context.eval (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:56:27)",
+                "diff": null
+              },
+              "uuid": "72671515-6ca5-496d-9c3b-6a375a729e5b",
+              "parentUUID": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 55 multiple - Gradebook, with 3 new student",
+              "fullTitle": "Add students TC 55 multiple - Gradebook, with 3 new student",
+              "timedOut": null,
+              "duration": 8397,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\nfor (var i = 0; i < 3; i++) {\n  _studentPOM.studentGB.studentAdd(randomName, randomSurname, 'https://i.pinimg.com/originals/23/52/f7/2352f71cba2c87344fc611b0e7ee7cb5.jpg');\n}\n;",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `#firstName`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `#firstName`, but never found it.\n    at StudentGB.get (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:281:17)\n    at StudentGB.studentAdd (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:267:12)\n    at Context.eval (https://gradebook.vivifyideas.com/__cypress/tests?p=cypress/integration/addStudents.spec.js:65:29)",
+                "diff": null
+              },
+              "uuid": "1b94dae2-f51c-4465-b389-e2f3a4951cbe",
+              "parentUUID": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 65 - Delete my gradebook",
+              "fullTitle": "Add students TC 65 - Delete my gradebook",
+              "timedOut": null,
+              "duration": 3083,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('My Gradebook').click();\ncy.url().should('include', 'my-gradebook');\ncy.get('.btn-danger').should('be.visible').click();\ncy.wait('@gb');\ncy.url().should('eq', 'https://gradebook.vivifyideas.com/gradebooks');\ncy.get('input[type=text]').should('be.visible').type('Little Red');\ncy.get('.btn').contains('Search').should('be.visible').click();\ncy.contains('There is no more gradebooks in base, try again').should('be.visible');",
+              "err": {},
+              "uuid": "bcf3ffdb-8687-4db8-9e8a-935e93ec494c",
+              "parentUUID": "fcee0d83-3a11-4c56-878a-84b480079e0c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6efeef59-24fd-4fc8-88a8-0e82f8ec88c5",
+            "d8f25954-8eeb-4765-8a0c-b055fc5ba1af",
+            "bcf3ffdb-8687-4db8-9e8a-935e93ec494c"
+          ],
+          "failures": [
+            "72671515-6ca5-496d-9c3b-6a375a729e5b",
+            "1b94dae2-f51c-4465-b389-e2f3a4951cbe"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 24187,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

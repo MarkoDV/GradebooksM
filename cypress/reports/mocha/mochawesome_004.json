@@ -1,0 +1,202 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-08-29T15:06:40.502Z",
+    "end": "2020-08-29T15:06:50.642Z",
+    "duration": 10140,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e10eb88b-4eaa-4a67-9a2e-9cac2780e791",
+      "title": "",
+      "fullFile": "cypress/integration/login.spec.js",
+      "file": "cypress/integration/login.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+          "title": "The Home Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC 4 - Sign in with non registered email address",
+              "fullTitle": "The Home Page TC 4 - Sign in with non registered email address",
+              "timedOut": null,
+              "duration": 2139,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('Sign in').click();\n_loginPOM.authPage.signin(randomEmail, _user.user.password);\ncy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login');\ncy.get('.nav-link').contains('Sign in').should('be.visible');",
+              "err": {},
+              "uuid": "bff09cc2-4fd2-467c-8a36-d51fa2f0d30e",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 5 - Sign in with wrong password",
+              "fullTitle": "The Home Page TC 5 - Sign in with wrong password",
+              "timedOut": null,
+              "duration": 1429,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.nav-link').contains('Sign in').click();\n_loginPOM.authPage.signin(_user.user.email, randomPassword);\ncy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login');\ncy.get('.nav-link').contains('Sign in').should('be.visible');",
+              "err": {},
+              "uuid": "15683eca-2c83-4fb4-9f3d-d4ab24051ef6",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 7 - Sign in with valid email and password",
+              "fullTitle": "The Home Page TC 7 - Sign in with valid email and password",
+              "timedOut": null,
+              "duration": 1653,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPOM.authPage.signin(_user.user.email, _user.user.password);\ncy.wait('@gb');\ncy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');",
+              "err": {},
+              "uuid": "b6c9ff64-2659-4502-93cf-57aabd191876",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Navigation after signin",
+              "fullTitle": "The Home Page Navigation after signin",
+              "timedOut": null,
+              "duration": 2472,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPOM.authPage.signin(_user.user.email, _user.user.password);\ncy.wait('@gb');\ncy.url().should('include', 'gradebooks');\ncy.scrollTo('bottom');\ncy.get('.btn').contains('Next').should('be.visible').click();\ncy.get('.btn').contains('Previous').should('be.visible').click();\ncy.get('.nav-link').contains('Sign out').should('be.visible');\ncy.go('back'); //logged but back to login page:\ncy.get('.form-signin-heading').should('contain', 'Please login'); //forward to gradebook home page but without login:\ncy.go('forward');\ncy.location().should(function (loc) {\n  expect(loc.pathname).to.eq('/gradebooks');\n});",
+              "err": {},
+              "uuid": "82b2e9f1-1d37-4b2a-9656-aa9194efd01e",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC Special - Sig in without any credentials",
+              "fullTitle": "The Home Page TC Special - Sig in without any credentials",
+              "timedOut": null,
+              "duration": 429,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('input[type=text]').invoke('val', '');\ncy.get('input[type=password]').invoke('val', '');\ncy.get('button[type=submit]').click();\ncy.get('input[type=text]').then(function ($input) {\n  expect($input[0].validationMessage).to.eq('Please fill in this field.');\n});",
+              "err": {},
+              "uuid": "3daae757-99bb-4911-a4d3-89a4ab8c7abf",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 8 - Verify the logout operation",
+              "fullTitle": "The Home Page TC 8 - Verify the logout operation",
+              "timedOut": null,
+              "duration": 1746,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPOM.authPage.signin(_user.user.email, _user.user.password);\ncy.wait('@gb');\ncy.url().should('be.eq', 'https://gradebook.vivifyideas.com/gradebooks');\ncy.get('.nav-link').contains('Sign out').should('be.visible').click();\ncy.url().should('be.eq', 'https://gradebook.vivifyideas.com/login');",
+              "err": {},
+              "uuid": "fe50b2ef-c5ab-4b9b-bccf-b800647815cf",
+              "parentUUID": "c69e88f7-0719-4ce9-a766-8f4a203ae8be",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bff09cc2-4fd2-467c-8a36-d51fa2f0d30e",
+            "15683eca-2c83-4fb4-9f3d-d4ab24051ef6",
+            "b6c9ff64-2659-4502-93cf-57aabd191876",
+            "82b2e9f1-1d37-4b2a-9656-aa9194efd01e",
+            "3daae757-99bb-4911-a4d3-89a4ab8c7abf",
+            "fe50b2ef-c5ab-4b9b-bccf-b800647815cf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9868,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

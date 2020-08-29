@@ -1,0 +1,221 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-08-29T15:04:47.266Z",
+    "end": "2020-08-29T15:05:17.930Z",
+    "duration": 30664,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a932e66f-9227-41d5-aff2-6ea40d706a39",
+      "title": "",
+      "fullFile": "cypress/integration/another_author.spec.js",
+      "file": "cypress/integration/another_author.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c4996192-eebd-4179-9e11-cda44071aaba",
+          "title": "Visit and modify another author gradebook",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC 31 - Visit Single Gradebebook Page of another author-professor",
+              "fullTitle": "Visit and modify another author gradebook TC 31 - Visit Single Gradebebook Page of another author-professor",
+              "timedOut": null,
+              "duration": 2678,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark th').eq(0).should('contain', 'Gradebook');\ncy.get('.table-dark th').eq(2).should('contain.text', 'Created at');\ncy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');",
+              "err": {},
+              "uuid": "093b2164-4356-4bb8-b1d1-6e80a23b9954",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 34 - Add Student to Gradebook of other professor(author) with image",
+              "fullTitle": "Visit and modify another author gradebook TC 34 - Add Student to Gradebook of other professor(author) with image",
+              "timedOut": null,
+              "duration": 5474,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');\n_studentPOM.studentGB.studentAdd('Sergei', 'Yesenin', 'https://glamourprin.files.wordpress.com/2018/01/230px-esenin_moscow_1922.jpg');",
+              "err": {},
+              "uuid": "da032f4e-079d-4bdc-88a4-ea006e1c4c7b",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 35 - Edit Gradebook of the other author( title and professor)",
+              "fullTitle": "Visit and modify another author gradebook TC 35 - Edit Gradebook of the other author( title and professor)",
+              "timedOut": null,
+              "duration": 8256,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');\ncy.get('.btn-warning').contains('Edit Gradebook').click();\ncy.url().should('contain', 'single-gradebook');\ncy.get('#title').clear().type(randomTitle); // Tantalus' struggle\ncy.get('#professor').find('option').then(function ($elm) {\n  return $elm.get(1).setAttribute('selected', \"selected\");\n}).parent().trigger('change');\ncy.get('.btn-primary').contains('Submit').click();",
+              "err": {},
+              "uuid": "203f4151-0133-4c18-90e0-d2c79d4bd85f",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 38 - Write comment at the Single Gradebook Page from other author (255 characters)",
+              "fullTitle": "Visit and modify another author gradebook TC 38 - Write comment at the Single Gradebook Page from other author (255 characters)",
+              "timedOut": null,
+              "duration": 7979,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');\ncy.get('textarea').should('be.visible').and('have.attr', 'placeholder', 'Writte your comment').type(alphanum);\ncy.get('.btn-primary').contains('Submit Comment').should('be.visible').click();",
+              "err": {},
+              "uuid": "da039bea-2cf4-4abc-9c0b-405cd988b41f",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 41 - Delete comment written by user on Single Gradebook Page of other author",
+              "fullTitle": "Visit and modify another author gradebook TC 41 - Delete comment written by user on Single Gradebook Page of other author",
+              "timedOut": null,
+              "duration": 2103,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');\ncy.get('.btn-danger').last().contains('Delete').click();",
+              "err": {},
+              "uuid": "bd913572-0d18-49ec-9845-f30142e7138f",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 43 - Delete Gradebook of other author(professor)",
+              "fullTitle": "Visit and modify another author gradebook TC 43 - Delete Gradebook of other author(professor)",
+              "timedOut": null,
+              "duration": 2058,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(0).click();\ncy.url().should('include', 'single-gradebook');\ncy.get('.btn-danger').contains('Delete Gradebook').click();",
+              "err": {},
+              "uuid": "520c88c6-d54f-4005-9e68-7cef111e046d",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC 46 - Gradebook Filter - click on the Professor name of the filtered gradebook",
+              "fullTitle": "Visit and modify another author gradebook TC 46 - Gradebook Filter - click on the Professor name of the filtered gradebook",
+              "timedOut": null,
+              "duration": 1853,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.table-dark td').eq(1).click();\ncy.url().should('contain', 'single-professor');",
+              "err": {},
+              "uuid": "2291788a-06dc-4041-a6d0-d82ef8912afd",
+              "parentUUID": "c4996192-eebd-4179-9e11-cda44071aaba",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "093b2164-4356-4bb8-b1d1-6e80a23b9954",
+            "da032f4e-079d-4bdc-88a4-ea006e1c4c7b",
+            "203f4151-0133-4c18-90e0-d2c79d4bd85f",
+            "da039bea-2cf4-4abc-9c0b-405cd988b41f",
+            "bd913572-0d18-49ec-9845-f30142e7138f",
+            "520c88c6-d54f-4005-9e68-7cef111e046d",
+            "2291788a-06dc-4041-a6d0-d82ef8912afd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 30401,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

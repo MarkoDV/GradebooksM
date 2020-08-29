@@ -25,7 +25,6 @@ describe('Add students', ()=>{
     it('TC 51 - Create new gradebook', ()=>{
         cy.get('.nav-link').contains('Create Gradebook').should('be.visible').click();
         createGB.creation('Litte Red Riding Hood');
-        cy.wait('@gb');
     });
     it('TC 55 - Add Student to Gradebook', ()=>{
         cy.get('.nav-link').contains('My Gradebook').click();
@@ -38,7 +37,6 @@ describe('Add students', ()=>{
         cy.url().should('include', 'my-gradebook');
         for (let i=0; i<3; i++) {
             studentGB.studentAdd(randomName, randomSurname, 'https://i.pinimg.com/originals/23/52/f7/2352f71cba2c87344fc611b0e7ee7cb5.jpg'); 
-            cy.url().should('include', 'single-gradebook'); 
         }; 
     });
     it('TC 65 - Delete my gradebook', ()=>{
